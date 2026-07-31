@@ -1,0 +1,70 @@
+<div class="p-5 px-56 font-sans!">
+  <h1 class="text-black font-bold">Fall Classes 2027</h1>
+
+  <p-panel toggler="header" [toggleable]="true" [collapsed]="true" class="mb-5">
+    <ng-template #header>
+      <h2 class="cursor-pointer">Pre-Placement vs Level classes</h2>
+    </ng-template>
+    <p-panel toggler="header" [toggleable]="true" [collapsed]="true" class="mb-5">
+      <ng-template #header>
+        <h2 class="cursor-pointer">Pre-Placement</h2>
+      </ng-template>
+      <p class="m-0 text-color-secondary">
+        These classes are for younger or new students where teachers have not had the opportunity to evaluate the students' current
+        progression within a style. These classes allow teachers to observe and evaluate a dancers skills before recommending a more
+        intensive leveled class for your student.
+      </p>
+    </p-panel>
+    <p-panel toggler="header" [toggleable]="true" [collapsed]="true" class="mb-5">
+      <ng-template #header>
+        <h2 class="cursor-pointer">Leveled classes</h2>
+      </ng-template>
+      <p class="m-0 text-color-secondary">
+        These classes are based on teacher recommendation and assessment. This means that the students skills and progression within a style
+        have been evaluated and assessed. This means that these classes at these skill level may include students of varying ages.
+      </p>
+    </p-panel>
+  </p-panel>
+
+  @for (style of formattedClasses; track style) {
+    <p-panel toggler="header" [toggleable]="true" [collapsed]="true" class="mb-5">
+      <ng-template #header>
+        <h2 class="cursor-pointer">{{ style.name }}</h2>
+      </ng-template>
+      <p class="base-description m-0 pb-4 text-lg whitespace-pre-line">
+        {{ style.description }}
+      </p>
+      <h3 class="uppercase">Attire Requirements</h3>
+      <p class="base-description m-0 pb-4 text-lg whitespace-pre-line">
+        {{ style.attire }}
+      </p>
+
+      <div class="levels-container pl-4 border-left-1 surface-border">
+        @if (style.ageGroups && style.ageGroups.length > 0) {
+          <h4 class="mt-0 mb-3 text-primary uppercase">Age Groups</h4>
+          @for (age of style.ageGroups; track $index) {
+            <p-panel toggler="header" [toggleable]="true" [collapsed]="true" class="mb-3">
+              <ng-template #header>
+                <h2 class="cursor-pointer">{{ age.ageGroupName }}</h2>
+              </ng-template>
+              @if (age.classes && age.classes.length > 0) {
+                <h4 class="mt-0 mb-3 text-primary uppercase">Available Classes</h4>
+
+                @for (class of age.classes; track $index) {
+                  <p-panel toggler="header" [toggleable]="true" [collapsed]="true" class="mb-3">
+                    <ng-template #header>
+                      <h2 class="cursor-pointer">{{ class.className }}</h2>
+                    </ng-template>
+                    <p class="m-0 text-color-secondary whitespace-pre-line">
+                      {{ class.details }}
+                    </p>
+                  </p-panel>
+                }
+              }
+            </p-panel>
+          }
+        }
+      </div>
+    </p-panel>
+  }
+</div>

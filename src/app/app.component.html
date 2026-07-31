@@ -1,0 +1,84 @@
+<div class="flex flex-col h-full w-full">
+  <header class="sticky top-0 z-50 border-b border-gray-100 shadow-sm bg-[#f0ecec]">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <div (click)="navigateTo('')" class="shrink-0 flex items-center cursor-pointer">
+          <img
+            (click)="navigateTo('')"
+            src="assets/logo/RTDA_Logo_Only2.png"
+            alt="Rising Tide Dance Academy Logo"
+            style="width: 5rem; height: 5rem; cursor: pointer"
+          />
+          <div class="rtda-title">
+            <h1 style="color: #165163; margin: 0">RISING TIDE</h1>
+            <h3 style="color: #70afb5; margin: 0">DANCE ACADEMY</h3>
+          </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex space-x-8 items-center">
+          <button (click)="navigateTo('about-us')" [class.selected]="currentPath() === 'about-us'" class="font-bold">About</button>
+          <button (click)="navigateTo('classes')" [class.selected]="currentPath() === 'classes'" class="font-bold">Classes</button>
+          <button (click)="navigateTo('schedule-tuition')" [class.selected]="currentPath() === 'schedule-tuition'" class="font-bold">
+            Schedule & Tuition
+          </button>
+          <button (click)="navigateTo('contact-us')" [class.selected]="currentPath() === 'contact-us'" class="font-bold">Contact</button>
+          <button (click)="navigateTo('gallery')" [class.selected]="currentPath() === 'gallery'" class="font-bold">Gallery</button>
+          <button (click)="navigateTo('da-barre')" [class.selected]="currentPath() === 'da-barre'" class="font-bold">Da Barre</button>
+          <button (click)="navigateTo('da-barre')" [class.selected]="currentPath() === 'da-barre'" class="font-bold">Parent Portal</button>
+        </nav>
+
+        <div class="flex md:hidden">
+          @if (!mobileMenuOpen()) {
+            <button
+              (click)="toggleMobileMenu(true)"
+              type="button"
+              class="text-[#1C1C1E] hover:text-[#70afb5] focus:outline-none p-2"
+              aria-label="Toggle menu"
+            >
+              <fa-icon [icon]="faBars" class="fa-2xl burger" />
+            </button>
+          } @else {
+            <button (click)="toggleMobileMenu(false)" type="button" class="text-[#1C1C1E] hover:text-[#C5A880] p-1">
+              <fa-icon [icon]="faXmark" class="fa-2xl" />
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Side Menu Overlay -->
+    @if (mobileMenuOpen()) {
+      <div class="max-w-xs w-full flex flex-col space-y-6 bg-[#f0ecec] fixed top-20 right-0">
+        <button (click)="navigateTo('about-us')" class="font-bold">About</button>
+        <button (click)="navigateTo('classes')" class="font-bold">Classes</button>
+        <button (click)="navigateTo('schedule-tuition')" class="font-bold">Schedule & Tuition</button>
+        <button (click)="navigateTo('contact-us')" class="font-bold">Contact</button>
+        <button (click)="navigateTo('gallery')" class="font-bold">Gallery</button>
+        <button (click)="navigateTo('da-barre')" class="font-bold">Da Barre</button>
+        <button (click)="navigateTo('da-barre')" class="font-bold">Parent Portal</button>
+      </div>
+    }
+  </header>
+
+  <router-outlet />
+
+  <div class="footer">
+    <div class="text-center">
+      <div class="font-extrabold text-xl text-[#70afb5]">Location</div>
+      <div>South Carolina</div>
+    </div>
+    <div class="text-center">
+      <div class="font-extrabold text-xl text-[#70afb5]">Office Hours</div>
+      <div>Monday-Friday 5-8 PM</div>
+      <div>Saturday 9-12 PM</div>
+      <div>Sunday Closed</div>
+    </div>
+    <div class="text-center">
+      <div class="font-extrabold text-xl text-[#70afb5]">Contact</div>
+      <div>Email: admin@risingtidedanceacademy.com</div>
+      <div>Phone: 303-681-5904</div>
+    </div>
+  </div>
+</div>
