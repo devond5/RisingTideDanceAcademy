@@ -1,0 +1,8 @@
+package.json
+package-lock.json
+**/.angular
+**/.github
+**/coverage
+**/dist
+**/e2e
+**/node_modules

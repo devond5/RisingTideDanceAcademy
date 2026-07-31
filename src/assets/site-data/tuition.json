@@ -1,0 +1,15 @@
+{
+  "tuition": [
+    { "hours": 0.75, "price": "$70" },
+    { "hours": 1, "price": "$85" },
+    { "hours": 1.5, "price": "$115" },
+    { "hours": 2, "price": "$140" },
+    { "hours": 2.5, "price": "$165" },
+    { "hours": 3, "price": "$185" },
+    { "hours": 3.5, "price": "$205" },
+    { "hours": 4, "price": "$225" },
+    { "hours": 4.5, "price": "$240" },
+    { "hours": 5, "price": "$255" },
+    { "hours": 6, "price": "$280" }
+  ]
+}

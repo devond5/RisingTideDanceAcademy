@@ -1,0 +1,288 @@
+<div class="bg-[#8E8E93] text-[#1C1C1E] antialiased flex flex-col h-full">
+  <!-- Main Content Grid -->
+  <main class="mx-auto px-0 sm:p-6 lg:p-2 grow w-full h-full">
+    <div class="flex flex-col p-5 xl:p-0 xl:flex-row items-stretch gap-6 w-full h-full">
+      <div class="flex flex-col gap-6">
+        <div class="border border-[#70afb5]/20 shadow-sm bg-black rounded-2xl w-full xl:w-95 flex-1 flex flex-col gap-0 overflow-auto">
+          <div class="sticky top-0 p-2 flex flex-col bg-black">
+            <h2 class="m-0 md:m-[revert] font-bold mb-2 text-white">Tuition Scale</h2>
+            <p class="text-xs text-[#70afb5] mb-1">
+              <strong>Tuition is a flat monthly fee based on the total combined hours enrolled per family per week.</strong>
+            </p>
+          </div>
+          <div class="flex flex-col p-2">
+            <div class="flex flex-col space-y-3 mb-6 text-[#70afb5]">
+              @for (val of tuition; track val.hours) {
+                <div class="flex flex-row justify-between items-center text-sm border-b border-[#70afb5]/10">
+                  <span class="font-medium text-[#70afb5]">
+                    @if (val.hours === 6) {
+                      {{ val.hours }}+
+                    } @else {
+                      {{ val.hours }}
+                    }
+                    hrs / week</span
+                  >
+                  <span class="font-bold text-[#70afb5]">{{ val.price }} / mo</span>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full xl:w-95 xl:flex-1 flex flex-col gap-0 overflow-auto rounded-2xl bg-black border border-[#70afb5]/20 shadow-sm">
+          <div class="sticky top-0 p-2 flex flex-col bg-black">
+            <h2 class="m-0 md:m-[revert] font-bold text-white">Discounts & Fees</h2>
+          </div>
+          <div class="flex flex-col p-2">
+            <p class="text-white">Discounts:</p>
+            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+              <fa-icon [icon]="faInfoCircle" class="mr-1" />
+              <span>Multi-sibling discount: <strong>10% Off</strong> base tuition</span>
+            </div>
+            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+              <fa-icon [icon]="faInfoCircle" class="mr-1" />
+              <span>Ensemble & Artists in Motion Class Assistant: <strong>$20 Off</strong> tuition per class assisted</span>
+            </div>
+            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+              <fa-icon [icon]="faInfoCircle" class="mr-1" />
+              <span>Ensemble & Artists in Motion Admin Assistant: <strong>$15 Off</strong> base tuition per hour worked</span>
+            </div>
+            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+              <fa-icon [icon]="faInfoCircle" class="mr-1" />
+              <span>Parent/Studio Trade Work: </span>
+            </div>
+            <p class="text-white">Fees:</p>
+            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+              <fa-icon [icon]="faInfoCircle" class="mr-1" />
+              <span>Annual Registration(Per Household): <strong>$60.00</strong></span>
+            </div>
+            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+              <fa-icon [icon]="faInfoCircle" class="mr-1" />
+              <span>Recital Costume(Per Routine): <strong>$25.00</strong></span>
+            </div>
+            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+              <fa-icon [icon]="faInfoCircle" class="mr-1" />
+              <span>Recital(Per Dancer): <strong>$85.00</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grow flex flex-col gap-5 basis-full lg:basis-0">
+        <!-- Filter bar container built with Flexbox -->
+        <div class="border border-[#70afb5]/20 shadow-sm p-3 bg-black rounded-2xl flex flex-col">
+          <h2 class="font-bold mb-4 text-white m-0 md:m-[revert]">Filter Classes</h2>
+
+          <div class="flex flex-col sm:flex-row gap-4 w-full">
+            <!-- Day Filter -->
+            <div class="flex-1 flex flex-col">
+              <label class="block text-xs font-semibold text-[#70afb5] uppercase tracking-wider mb-2">Day of Week</label>
+              <select
+                (change)="updateFilter('day', $any($event.target).value)"
+                class="w-full bg-[#F4F9F9] border border-[#70afb5]/20 rounded-lg py-2.5 px-3 text-sm text-[#165163] outline-none focus:border-[#165163]"
+              >
+                @for (opt of dayOptions; track opt.value) {
+                  <option [value]="opt.value" [selected]="dayFilter() === opt.value">{{ opt.label }}</option>
+                }
+              </select>
+            </div>
+
+            <!-- Age Filter -->
+            <div class="flex-1 flex flex-col">
+              <label class="block text-xs font-semibold text-[#70afb5] uppercase tracking-wider mb-2">Age Group</label>
+              <select
+                (change)="updateFilter('age', $any($event.target).value)"
+                class="w-full bg-[#F4F9F9] border border-[#70afb5]/20 rounded-lg py-2.5 px-3 text-sm text-[#165163] outline-none focus:border-[#165163]"
+              >
+                @for (opt of ageOptions; track opt.value) {
+                  <option [value]="opt.value" [selected]="ageFilter() === opt.value">{{ opt.label }}</option>
+                }
+              </select>
+            </div>
+
+            <!-- Style Filter -->
+            <div class="flex-1 flex flex-col">
+              <label class="block text-xs font-semibold text-[#70afb5] uppercase tracking-wider mb-2">Dance Style</label>
+              <select
+                (change)="updateFilter('style', $any($event.target).value)"
+                class="w-full bg-[#F4F9F9] border border-[#70afb5]/20 rounded-lg py-2.5 px-3 text-sm text-[#165163] outline-none focus:border-[#165163]"
+              >
+                @for (opt of styleOptions; track opt.value) {
+                  <option [value]="opt.value" [selected]="styleFilter() === opt.value">{{ opt.label }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="flex-1 flex flex-col">
+              <label class="block text-xs font-semibold text-[#70afb5] uppercase tracking-wider mb-2"> Level</label>
+              <select
+                (change)="updateFilter('level', $any($event.target).value)"
+                class="w-full bg-[#F4F9F9] border border-[#70afb5]/20 rounded-lg py-2.5 px-3 text-sm text-[#165163] outline-none focus:border-[#165163]"
+              >
+                @for (opt of levelOptions; track opt.value) {
+                  <option [value]="opt.value" [selected]="levelFilter() === opt.value">{{ opt.label }}</option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schedule Panel using p-table -->
+        <div
+          class="bg-black rounded-2xl border border-[#70afb5]/20 shadow-sm overflow-hidden flex flex-col max-h-[46rem] md:max-h-[revert]"
+        >
+          <div class="px-6 py-4 border-b border-[#70afb5]/10 flex flex-row justify-between items-center bg-black">
+            <h2 class="m-0 font-bold text-white md:m-[revert]">Schedule</h2>
+            <span class="text-xs font-semibold text-[#70afb5] bg-[#70afb5]/15 px-3 py-1 rounded-full">
+              {{
+                filteredClasses().length +
+                  (filteredClasses().length === 1 ? ' Class' : ' Classes') +
+                  '
+                            Available'
+              }}
+            </span>
+          </div>
+
+          <!-- PrimeNG p-table responsive architecture -->
+          <p-table
+            [value]="filteredClasses()"
+            [(selection)]="selectedClassesTable"
+            [scrollable]="true"
+            scrollHeight="flex"
+            styleClass="p-datatable-custom"
+            class="w-full overflow-auto"
+          >
+            <ng-template pTemplate="header">
+              <tr class="text-xs font-semibold uppercase text-[#70afb5] tracking-wider bg-white border-b border-[#70afb5]/15">
+                <th pFrozenColumn class="py-4 px-6 text-left">
+                  <p-tableHeaderCheckbox />
+                </th>
+                <th class="py-4 px-6 text-left!">Class Name</th>
+                <th class="py-4 px-6 text-center!">Class Size</th>
+                <th class="py-4 px-6 text-center!">Level</th>
+                <th class="py-4 px-6 text-center!">Age Group</th>
+                <th class="py-4 px-6 text-left!">Day & Time</th>
+                <th class="py-4 px-6 text-left!">Teacher</th>
+                <th class="py-4 px-6 text-center!">Hours</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-cls>
+              <tr class="hover:bg-[#F4F9F9]/40 transition-colors border-b border-[#70afb5]/10">
+                <td pFrozenColumn class="py-5 px-6 font-semibold text-base text-[#165163] text-left">
+                  <p-tableCheckbox [value]="cls" />
+                </td>
+
+                <!-- Class Details -->
+                <td style="padding: 0.5rem 0.75rem" class="font-semibold text-base text-white text-left!">
+                  <div class="flex flex-col">
+                    <span>{{ cls.className }}</span>
+                    <span class="text-xs text-[#70afb5] font-light">{{ cls.baseStyle }}</span>
+                  </div>
+                </td>
+
+                <!-- Size -->
+                <td class="py-5 px-6 text-[#70afb5] font-medium text-sm text-center!">
+                  {{ cls.size }}
+                </td>
+
+                <!-- Level -->
+                <td class="py-5 px-6 text-[#70afb5] font-medium text-sm text-center!">
+                  {{ cls.level }}
+                </td>
+
+                <!-- Age Level Badge -->
+                <td class="py-5 px-6 text-center!">
+                  <span
+                    class="text-xs font-semibold text-[#165163] bg-[#F4F9F9] border border-[#70afb5]/20 rounded-full px-3 py-1 inline-block whitespace-nowrap"
+                  >
+                    {{ convertAgeToLabel(cls.ageGroup) }}
+                  </span>
+                </td>
+
+                <!-- Day & Hours details -->
+                <td class="py-5 px-6 text-left!">
+                  <div class="flex flex-col justify-center">
+                    <span class="text-xs font-semibold text-white">{{ cls.classDay }}</span>
+                    <span class="text-xs text-[#70afb5]">{{ cls.time }}</span>
+                  </div>
+                </td>
+
+                <!-- Instructor -->
+                <td class="py-5 px-6 text-[#70afb5] font-medium text-sm text-left!">
+                  {{ cls.teacher }}
+                </td>
+
+                <!-- Scheduled Hours -->
+                <td class="py-5 px-6 text-center text-xs font-semibold text-[#70afb5] whitespace-nowrap">{{ cls.hours }} hr</td>
+              </tr>
+            </ng-template>
+
+            <!-- Custom Table Empty State -->
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="8" class="py-12 text-center text-[#70afb5]">
+                  <div class="flex flex-row items-center justify-center">
+                    <span class="material-icons text-5xl mb-2 opacity-50">No Classes Found.</span>
+                    <button
+                      (click)="resetFilters()"
+                      class="bg-[#165163] hover:bg-[#165163]/90 cursor-pointer text-white mx-5 py-3 rounded-xl font-bold text-sm tracking-wider uppercase shadow-md flex items-center justify-center gap-2 transition-colors shrink"
+                    >
+                      Reset Filters
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+
+      <div>
+        <div class="bg-black p-3 rounded-2xl border border-[#165163]/30 shadow-md relative overflow-hidden flex flex-col">
+          <div class="absolute top-0 right-0 w-24 h-auto bg-[#70afb5]/5 rounded-full -mr-8 -mt-8"></div>
+          <h2 class="m-0 md:m-[revert] font-bold mb-1 text-white">Tuition Estimator</h2>
+
+          <!-- Selection list wrapper (Flex items) -->
+          <div class="flex flex-col space-y-3 mb-5 sm:max-h-[50%] lg:max-h-85 overflow-y-auto custom-scrollbar pr-1">
+            @for (cls of selectedClasses(); track cls.className) {
+              <div class="flex flex-row items-center justify-between bg-[#70afb5]/15 p-3 rounded-xl border border-[#70afb5]/10 text-xs">
+                <div class="flex-1 min-w-0 pr-2">
+                  <div class="font-bold text-[#165163] truncate">{{ cls.className }}</div>
+                  <div class="text-[#70afb5] text-sm mt-0.5">{{ cls.classDay }} • {{ cls.hours }} hr</div>
+                </div>
+                <button (click)="toggleSelection(cls.className)" class="text-[#70afb5] hover:text-red-500 p-1.5 transition">
+                  <span class="material-icons text-sm">delete</span>
+                </button>
+              </div>
+            } @empty {
+              <p class="text-xs text-center text-[#70afb5] py-4 italic">No classes selected. Select a class to begin estimating.</p>
+            }
+          </div>
+
+          <!-- Cost breakdown calculation summary using Flex Rows -->
+          <div class="border-t border-gray-100 pt-4 flex flex-col space-y-2.5">
+            <div class="flex flex-row justify-between text-xs text-[#70afb5]">
+              <span>Total Cumulative Hours:</span>
+              <span class="font-bold">{{ totalHours().toFixed(2) }} hrs/wk</span>
+            </div>
+            <div class="flex flex-row justify-between items-center pt-2 border-t border-gray-100">
+              <span class="text-sm font-semibold text-white">Estimated Monthly Total:</span>
+              <span class="text-2xl font-bold text-white">
+                {{ finalMonthlyCost() }}<span class="text-xs text-white font-normal">/mo</span>
+              </span>
+            </div>
+          </div>
+
+          <button
+            (click)="registerSelected()"
+            class="w-full bg-[#165163] hover:bg-[#165163]/90 text-white mt-5 py-3 rounded-xl font-bold text-sm tracking-wider uppercase shadow-md flex items-center justify-center gap-2 transition-colors"
+          >
+            <span class="material-icons text-sm">login</span>
+            <span>Register Selected Classes</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

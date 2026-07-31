@@ -1,0 +1,24 @@
+{
+    "plugins": {
+        "@tailwindcss/postcss": {
+            "theme": {
+                "extend": {
+                    "fontFamily": {
+                        "serif": ["Playfair Display", "serif"],
+                        "sans": ["Inter", "sans-serif"]
+                    },
+                    "colors": {
+                        "studio": {
+                            "gold": "#70afb5",
+                            "goldDark": "#165163",
+                            "dark": "#1C1C1E",
+                            "neutralBg": "#FAF9F6",
+                            "charcoal": "#2C2C2E",
+                            "slate": "#8E8E93"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

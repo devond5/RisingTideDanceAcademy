@@ -1,0 +1,66 @@
+{
+  "baseStyles": [
+    {
+      "name": "Ballet",
+      "description": "The beautiful foundation of all dance styles. Ballet focuses on building grace, balance, discipline, and core strength while fostering a deep appreciation for classical technique. Perfect for dancers looking to refine their form and achieve effortless movement. Our ballet program is Vaganova based at its foundations to create beautiful technique, but to build well rounded dancers other ballet styles are introduced to the dancer such as French, Balanchine, RAD (Royal Academy of Dance), Cecchetti, and Contemporary. At RTDA we believe if your dancer were ever to go into an audition whether it is for a classical company or a contemporary movement company, they will always know what the instructor wants and is looking for.",
+      "attire": "Women: Black Ballet leotard (can be different styles), pink tights, pink ballet shoes, ballet skirt optional (no tutus), hair in ballet bun (if this style doesn't work for your hair reach out to teacher for guidance)  \n Men: Black ballet slippers, black mens' ballet tights, black or white fitted t-shirt or tank top, no boxers."
+    },
+    {
+      "name": "Hip Hop",
+      "description": "Bounce, Rock, and Groove! Hip Hop is community, culture, acceptance, and history. At RTDA we take a historical and foundational approach to Hip Hop. We start at the roots and foster the 5 pillars of Hip Hop along with our technical dance training. We then use those foundations to translate to the many different styles known today. Some examples include: Commercial, R&B/Lyrical, Whacking, and more. We at RTDA focus on the artistic ability to not only create fun and energetic Hip Hop dances but also use Hip Hop and street dance to tell stories through a grassroots approach to the style.",
+      "attire": "All: Show your individual style! CLEAN street shoes (preferably dance ONLY shoes), knee length minimum pants, loose fitting top/tank top/crop top, if wearing a sports bra dancers must wear a top over it, NO booty shorts, NO leggings."
+    },
+    {
+      "name": "Contemporary, Lyrical, & Modern",
+      "description": "Fluid, expression of the human soul. At RTDA we use these styles that come from a strong Ballet foundation to create expressive dancers who have no problem with looking deep and translating that to movement. We will sometimes use these styles interchangeably. We incorporate multiple Modern techniques to create strong and well rounded dancers. We use techniques derived from Graham, Horton, and Limón.",
+      "attire": "All: Barefoot or toe paws, form fitting dance wear, leggings (no flair pants) or jazz pants."
+    },
+    {
+      "name": "Jazz",
+      "description": "Technique, Style, Musicality, and Energy! Jazz is a bold expressive dance style that has a history of its own. At RTDA, to create well rounded dancers we will dive into all the different styles of Jazz we see today: Broadway, Street Jazz, Jazz/Funk, Latin/Afro Jazz.",
+      "attire": "All: Jazz shoes, No baggy clothes."
+    },
+    {
+      "name": "Tap",
+      "description": "Make music with your feet! Our tap program at Rising Tide teaches rhythm, timing, and percussive footwork. Dancers will develop a sharp ear for musicality while building ankle strength and quick coordination.",
+      "attire": "Tap shoes."
+    },
+    {
+      "name": "Choreography & Composition",
+      "description": "These classes will foster your dancers' creativity, and understanding of the process choreographers go through when creating a piece. These classes will explore foundational techniques to aid in choreographic composition,the breakdown of music and structure, and creating movement with a purpose.",
+      "attire": "All: Barefoot, socks, or style specific footwear, and comfortable clothing to move in."
+    },
+    {
+      "name": "Specialty Styles",
+      "description": "Combo Classes, Culture, and more! These classes are those sections of dance that might not belong to one of the styles above or to many. These classes can include Combo classes for those dancers just starting out who want to get multiple foundational styles. This also includes special classes in styles such as: African, Bollywood, Ballroom, etc.",
+      "attire": "Combo classes: See attire for other styles. \n Specialty: Attire will be communicated prior to class."
+    }
+  ],
+
+  "classes": [
+    {
+      "className": "Come Dance With Me Ballet",
+      "ageGroup": "Droplets",
+      "classDay": "Sat",
+      "time": "10:00 AM",
+      "teacher": "Suzie",
+      "hours": "1",
+      "size": "10",
+      "details": "A gentle, caregiver-assisted introduction to ballet through movement, music, and spatial awareness.",
+      "baseStyle": "Ballet",
+      "level": "Pre"
+    },
+    {
+      "className": "Ballet IV",
+      "ageGroup": "Tsunami",
+      "classDay": "M",
+      "time": "6 PM",
+      "teacher": "Jackie",
+      "hours": "1.5",
+      "size": "15",
+      "details": "A Class dedicated to turns, control, extensions, pre-pointe, and powerful leaps",
+      "baseStyle": "Ballet",
+      "level": "IV"
+    }
+  ]
+}

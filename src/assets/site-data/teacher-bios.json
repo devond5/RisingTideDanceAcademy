@@ -1,0 +1,18 @@
+{
+  "teachers": [
+    {
+      "teacherName": "Devon DeSpain",
+      "teacherStyles": ["Hip Hop", "Ballet", "Contemporary", "Lyrical", "Modern", "Jazz"],
+      "teacherPhoto": "assets/teacher-photos/Devon_2.JPG",
+      "teacherBio": "Founder and CO-Owner of Rising Tide Dance Academy. Graduated from Colorado State University with a BA in Dance and BS in Computer Science.",
+      "teacherVideos": []
+    },
+    {
+      "teacherName": "Rissa DeSpain",
+      "teacherStyles": ["Ballet", "Tap", "Jazz"],
+      "teacherPhotos": [],
+      "teacherBio": "CO-Founder of Rising Tide Dance Academy. Grew up competing at Millers Dance academy in Colorado.",
+      "teacherVideos": []
+    }
+  ]
+}
