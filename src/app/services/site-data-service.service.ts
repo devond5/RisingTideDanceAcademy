@@ -4,6 +4,7 @@ import {
   BaseStyleInfo,
   Class,
   ClassesAndSchedulesData,
+  GalleryData,
   TeacherBioData,
   TeacherBios,
   Tuition,
@@ -20,6 +21,7 @@ export class SiteDataService {
   public baseStyles: BehaviorSubject<BaseStyleInfo[]> = new BehaviorSubject<BaseStyleInfo[]>([]);
   public teacherBios: BehaviorSubject<TeacherBios[]> = new BehaviorSubject<TeacherBios[]>([]);
   public tuition: BehaviorSubject<Tuition[]> = new BehaviorSubject<Tuition[]>([]);
+  public gallery: BehaviorSubject<GalleryData> = new BehaviorSubject<GalleryData>({ images: [], videos: [] });
 
   getAllData(): void {
     this.http.get<TuitionData>('assets/site-data/tuition.json').subscribe({
@@ -44,6 +46,15 @@ export class SiteDataService {
       next: (classAndSchedules: ClassesAndSchedulesData) => {
         this.classes.next(classAndSchedules.classes);
         this.baseStyles.next(classAndSchedules.baseStyles);
+      },
+      error: err => {
+        console.error('Failed to class and schedule data', err);
+      },
+    });
+
+    this.http.get<GalleryData>('assets/site-data/gallery.json').subscribe({
+      next: (galleryData: GalleryData) => {
+        this.gallery.next(galleryData);
       },
       error: err => {
         console.error('Failed to class and schedule data', err);

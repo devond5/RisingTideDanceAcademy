@@ -1,27 +1,63 @@
 <ng-template #rtda>
-  <div class="flex flex-col items-center w-full h-full">
-    <h1 class="text-black">Our Story</h1>
-    <div></div>
+  <div class="flex flex-col items-center w-full h-full p-5 px-56">
+    <h1 class="text-black my-2">Our Story</h1>
+    <div class="bg-black rounded-2xl p-5">
+      <h3>Dance belongs to everyone.</h3>
+      <p>
+        We were founded on a simple, non-negotiable principle: every single student deserves access to world-class dance training,
+        regardless of their background or where they start. High-caliber instruction shouldn't be a privilege reserved for a select few—it
+        is the standard we set for every dancer who walks through our doors.
+      </p>
+
+      <h3>Where Excellence Meets Inclusivity</h3>
+      <p>
+        Technique, artistry, and individuality are the core pillars of our training. We exist to build strong technical dancers, confident
+        artists, and an open culture where students are celebrated for exactly who they are. We know that true talent isn't defined by
+        financial status or the ability to commit to an elite competition schedule. Too often, traditional studio models prioritize profits
+        or place the vast majority of their focus on company members, leaving recreational or high-potential students behind. We reject that
+        framework entirely. We understand that real-life circumstances vary, and we refuse to let barriers stand in the way of potential.
+        The next generation's Misty Copeland, Bob Fosse, Gene Kelly, or Alvin Ailey might be sitting in a beginner class, just waiting for
+        access to proper technical training and world-class education. At Rising Tide, we make sure that door is always open.
+      </p>
+
+      <h3>Beyond the Studio.</h3>
+      <p>
+        While we take pride in technical excellence, our mission extends far beyond perfect technique. We train the whole person. Our goal
+        is to mentor well-rounded, empathetic, and respectful human beings who use dance as a powerful medium to share their own unique
+        stories. We aren't just rasing dancers; we are rasing humans.
+      </p>
+
+      <h3>Your Journey, Your Passion.</h3>
+      <p>
+        Whether your dream is a professional career in commercial dance or classical ballet, becoming a choreographer or educator, or simply
+        discovering the joy of movement, your ambition is valid here. No matter which path you choose—or how far you want to take your
+        passion—every dancer at Rising Tide receives the exact same level of dedication, respect, and encouragement.
+      </p>
+    </div>
   </div>
 </ng-template>
 
 <ng-template #staff>
   <div class="flex flex-col items-center w-full h-full">
-    <h1 class="text-black">Our People</h1>
+    <h1 class="text-black my-2">Our People</h1>
     <div class="bg-black rounded-2xl w-3xl h-full mb-5 flex flex-col justify-center">
       <p-carousel [value]="instructors" [numVisible]="1" [numScroll]="1">
         <ng-template let-instructor pTemplate="item">
           <div class="px-4 flex justify-center">
             <div class="flex flex-col items-center">
               <h3 class="text-2xl font-semibold text-white mb-1">{{ instructor.teacherName }}</h3>
-              @if (instructor.teacherPhoto) {
-                <div class="group w-75 h-75 relative overflow-hidden rounded-xl mb-5 bg-neutral-800 aspect-5/5">
-                  <img
-                    [src]="instructor.teacherPhoto"
-                    [alt]="instructor.teacherName"
-                    class="w-75 h-75 object-cover transition duration-700 group-hover:scale-105 group-hover:opacity-80 grayscale group-hover:grayscale-0"
-                  />
-                </div>
+              @if (instructor.teacherPhotos) {
+                <p-galleria
+                  [value]="instructor.teacherPhotos"
+                  [showIndicators]="true"
+                  [showThumbnails]="false"
+                  [showIndicatorsOnItem]="true"
+                  [containerStyle]="{ 'max-width': '640px' }"
+                >
+                  <ng-template #item let-item>
+                    <img [src]="item" style="height: 200px; display: block" />
+                  </ng-template>
+                </p-galleria>
               }
 
               <p class="text-sm font-medium tracking-widest text-neutral-500 uppercase mb-4">{{ instructor.teacherStyles.join(', ') }}</p>
@@ -37,13 +73,18 @@
 </ng-template>
 
 <ng-template #studio>
-  <div class="flex flex-col items-center w-full h-full">
-    <h1 class="text-black">Our Studio</h1>
+  <div class="flex flex-col items-center w-full h-full p-5 px-56">
+    <h1 class="text-black my-2">Our Studio</h1>
+    <div class="bg-black rounded-2xl p-5">
+      <p>
+        We Are currently in search of a studio space. Hoping to have minimum 10,000 sq feet. 3 Studio spaces. Lobby and study/quiet room.
+      </p>
+    </div>
   </div>
 </ng-template>
 
 <div class="flex flex-col h-full w-full">
-  <p-tabs [value]="tabValue()" (valueChange)="onTabChange($event)">
+  <p-tabs class="sticky top-0" [value]="tabValue()" (valueChange)="onTabChange($event)">
     <p-tablist>
       <p-tab [value]="'0'" class="flex items-center !gap-2 text-inherit">
         <span>RTDA</span>

@@ -1,7 +1,12 @@
+export interface GalleryData {
+  images: string[];
+  videos: string[];
+}
+
 export interface TeacherBios {
   teacherName: string;
   teacherStyles: string[];
-  teacherPhoto: string;
+  teacherPhotos: string[];
   teacherBio: string;
   teacherVideos?: string[];
 }

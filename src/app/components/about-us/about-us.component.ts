@@ -5,10 +5,11 @@ import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
 import { SiteDataService } from '../../services/site-data-service.service';
 import { TeacherBios } from '../../types/class-schedule-teacher-tuition.type';
+import { GalleriaModule } from 'primeng/galleria';
 
 @Component({
   selector: 'app-about-us',
-  imports: [TabsModule, NgTemplateOutlet, CardModule, CarouselModule],
+  imports: [TabsModule, NgTemplateOutlet, CardModule, CarouselModule, GalleriaModule ],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss',
 })
