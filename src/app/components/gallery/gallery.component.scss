@@ -3,4 +3,16 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  overflow: auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::ng-deep .p-galleria-fullscreen{
+  max-height: 95%;
+      align-items: center;
+      display: flex;
 }

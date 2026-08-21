@@ -40,7 +40,7 @@
 <ng-template #staff>
   <div class="flex flex-col items-center w-full h-full">
     <h1 class="text-black my-2">Our People</h1>
-    <div class="bg-black rounded-2xl w-3xl h-full mb-5 flex flex-col justify-center">
+    <div class="bg-black rounded-2xl w-3xl h-auto mb-5 flex flex-col justify-center">
       <p-carousel [value]="instructors" [numVisible]="1" [numScroll]="1">
         <ng-template let-instructor pTemplate="item">
           <div class="px-4 flex justify-center">
@@ -49,10 +49,12 @@
               @if (instructor.teacherPhotos) {
                 <p-galleria
                   [value]="instructor.teacherPhotos"
-                  [showIndicators]="true"
+                  [showItemNavigators]="true"
                   [showThumbnails]="false"
-                  [showIndicatorsOnItem]="true"
+                  [showIndicatorsOnItem]="false"
+                  [showIndicators]="true"
                   [containerStyle]="{ 'max-width': '640px' }"
+                  [showItemNavigatorsOnHover]="true"
                 >
                   <ng-template #item let-item>
                     <img [src]="item" style="height: 200px; display: block" />
@@ -84,7 +86,7 @@
 </ng-template>
 
 <div class="flex flex-col h-full w-full">
-  <p-tabs class="sticky top-0" [value]="tabValue()" (valueChange)="onTabChange($event)">
+  <p-tabs class="sticky top-0 z-1" [value]="tabValue()" (valueChange)="onTabChange($event)">
     <p-tablist>
       <p-tab [value]="'0'" class="flex items-center !gap-2 text-inherit">
         <span>RTDA</span>

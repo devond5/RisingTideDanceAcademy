@@ -4,6 +4,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  overflow: auto;
 }
 
 $font-header: "Playfair Display", serif;
@@ -58,16 +59,10 @@ li {
 .landing-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   background-image: url("/assets/logo/Landing_background_black.png");
-
-  /* Step 2: Prevent the image from repeating/tiling */
   background-repeat: no-repeat;
-
-  /* Step 3: Center the image within the element */
   background-position: center;
-
-  /* Step 4: Scale the image to perfectly fill the container */
   background-size: cover;
   height: 100%;
   width: 100%;

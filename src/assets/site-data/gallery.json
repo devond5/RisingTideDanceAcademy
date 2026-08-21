@@ -1,9 +1,9 @@
 {
   "images": [
-    "assets/gallery/images/RTDA_Title.png",
-    "assets/gallery/images/RTDA_Title.png",
-    "assets/gallery/images/RTDA_Title.png",
-    "assets/gallery/images/RTDA_Title.png"
+    "assets/gallery/images/ballet.jpg",
+    "assets/gallery/images/contemp.jpg",
+    "assets/gallery/images/hiphop.jpg",
+    "assets/gallery/images/jazz.jpg"
  ],
   "videos": ["assets/gallery/videos/Devon_1.mp4"]
 }

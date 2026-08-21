@@ -39,11 +39,11 @@
 
   "classes": [
     {
-      "className": "Come Dance With Me Ballet",
+      "className": "Come Dance With Me Ballet TEST",
       "ageGroup": "Droplets",
       "classDay": "Sat",
       "time": "10:00 AM",
-      "teacher": "Suzie",
+      "teacher": "Test Teacher",
       "hours": "1",
       "size": "10",
       "details": "A gentle, caregiver-assisted introduction to ballet through movement, music, and spatial awareness.",
@@ -51,11 +51,11 @@
       "level": "Pre"
     },
     {
-      "className": "Ballet IV",
+      "className": "Ballet TEST",
       "ageGroup": "Tsunami",
       "classDay": "M",
       "time": "6 PM",
-      "teacher": "Jackie",
+      "teacher": "Test Teacher",
       "hours": "1.5",
       "size": "15",
       "details": "A Class dedicated to turns, control, extensions, pre-pointe, and powerful leaps",

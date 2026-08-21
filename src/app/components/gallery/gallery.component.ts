@@ -11,9 +11,9 @@ export class GalleryComponent implements OnInit {
 
    private siteDataService = inject(SiteDataService);
   
-  displayCustom: boolean = true;
+  displayCustom: boolean = false;
 
-  activeIndex: number = 0;
+  activeIndex: number = -1;
 
   images = model<string[]>([]);
 
@@ -45,5 +45,9 @@ export class GalleryComponent implements OnInit {
   imageClick(index: number) {
     this.activeIndex = index;
     this.displayCustom = true;
+  }
+
+  changeDispCustom(bool:boolean){
+    this.displayCustom = bool;
   }
 }

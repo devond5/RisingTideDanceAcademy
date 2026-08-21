@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { SiteDataService } from './services/site-data-service.service';
+import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import { SiteDataService } from './services/site-data-service.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  faInstagram = faInstagram;
+  faYoutube = faYoutube;
   private siteDataService = inject(SiteDataService);
   title = 'rising-tide-dance-academy';
   private route = inject(ActivatedRoute);

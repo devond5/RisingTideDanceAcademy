@@ -1,9 +1,45 @@
 <div class="landing-container">
-  <div class="landing-content">
-    <h1>Rising Tide Dance Academy</h1>
-
-    <div class="landing-buttons">
-      <button class="learn-more-button">Learn More</button> <button class="register-button">Register Now!</button>
+  <div class="inset-0 h-full w-1/2 bg-linear-to-r from-white/95 via-white/90 to-transparent p-10">
+    <div class="relative z-10 flex h-full w-3/4 left-0 flex-col pl-20 text-black justify-center">
+      <h1 class="text-5xl m-0">RISING TIDE</h1>
+      <h1 class="text-5xl m-0">DANCE ACADEMY</h1>
+      <h2 class="m-1">FIND YOUR FLOW. RISE TO YOUR POTENTIAL.</h2>
+      <p class="m-1">Fluidity, strength, and artistry. Discover the power of your own movement and let your passion rise with us.</p>
+      <p class="m-1">Summerville's up and coming Dance Studio in the Cane Bay and Nexton area.</p>
+      <p class="m-1">All ages all levels.</p>
+      <p class="m-1">
+        Providing classes in: Ballet, Hip Hop, Tap, Jazz, Contemporary/Lyrical/Modern, Choreography & Composition, and much more.
+      </p>
+      <div class="landing-buttons">
+        <button class="learn-more-button" (click)="navigateTo('about-us')">Learn More</button> <button class="register-button" (click)="navigateTo('schedule-tuition')">Register Now!</button>
+      </div>
+    </div>
+  </div>
+  <div class="bg-[#165163] w-full h-full flex flex-col px-10 items-center">
+    <h1>Why Rising Tide?</h1>
+    <div class="flex flex-row gap-15 justify-evenly">
+      <div class="text-center flex flex-col">
+        <h3 class="m-0">Knowledgeable Instructors</h3>
+        <p>
+          Our instructors take an artistic, well-rounded, and foundational approach to teaching. This helps your dancer achieve their dance
+          goals no matter their ambition.
+        </p>
+      </div>
+      <div class="text-center flex flex-col">
+        <h3 class="m-0">Inclusive Community</h3>
+        <p>We allow your dancer to be who they are. We encourage our dancers to dive deep and really use dance as an outlet.</p>
+      </div>
+      <div class="text-center flex flex-col">
+       <h3 class="m-0"> Wide range of styles</h3>
+        <p>
+          We want our dancers to be well rounded above all else. Which Is why at RTDA we supply a wide variety of styles as well as
+          occasional special styles such as: African, Bollywood, and more!
+        </p>
+      </div>
+      <div class="text-center flex flex-col">
+        <h3 class="m-0">Historical Learning</h3>
+        <p>Whether it is Hip Hop or Jazz we take a historical and fundamental approach to teaching.</p>
+      </div>
     </div>
   </div>
 </div>

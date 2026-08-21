@@ -24,8 +24,8 @@
             Schedule & Tuition
           </button>
           <button (click)="navigateTo('contact-us')" [class.selected]="currentPath() === 'contact-us'" class="font-bold">Contact</button>
-          <button (click)="navigateTo('gallery')" [class.selected]="currentPath() === 'gallery'" class="font-bold">Gallery</button>
-          <button (click)="navigateTo('da-barre')" [class.selected]="currentPath() === 'da-barre'" class="font-bold">Da Barre</button>
+          <!-- <button (click)="navigateTo('gallery')" [class.selected]="currentPath() === 'gallery'" class="font-bold">Gallery</button> -->
+          <!-- <button (click)="navigateTo('da-barre')" [class.selected]="currentPath() === 'da-barre'" class="font-bold">Da Barre</button> -->
           <!-- <button (click)="navigateTo('da-barre')" [class.selected]="currentPath() === 'da-barre'" class="font-bold">Parent Portal</button> -->
         </nav>
 
@@ -67,6 +67,8 @@
   <div class="footer">
     <div class="text-center">
       <div class="font-extrabold text-xl text-[#70afb5]">Location</div>
+      <div>TBD</div>
+      <div>Cane Bay / Nexton</div>
       <div>South Carolina</div>
     </div>
     <div class="text-center">
@@ -79,6 +81,13 @@
       <div class="font-extrabold text-xl text-[#70afb5]">Contact</div>
       <div>Email: admin@risingtidedanceacademy.com</div>
       <div>Phone: 303-681-5904</div>
+    </div>
+    <div class="text-center">
+      <div class="font-extrabold text-xl text-[#70afb5]">Follow Us</div>
+      <div class="social-line mt-1">
+        <a href="https://www.instagram.com/rtda_dance" target="_blank" rel="noopener noreferrer"><fa-icon [icon]="faInstagram" class="fa-instagram" size="lg"></fa-icon></a>
+         <a href="https://youtube.com/@rising_tide_dance?si=hNM5I0ajUIMD6Fvs" target="_blank" rel="noopener noreferrer"><fa-icon [icon]="faYoutube" class="fa-youtube" size="lg"></fa-icon></a>
+      </div>
     </div>
   </div>
 </div>
