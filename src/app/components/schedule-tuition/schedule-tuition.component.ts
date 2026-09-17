@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
@@ -6,6 +6,9 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SiteDataService } from '../../services/site-data-service.service';
 import { AgeGroup, BaseStyles, Class, Days, Level, Tuition } from '../../types/class-schedule-teacher-tuition.type';
+import { TabsModule } from 'primeng/tabs';
+import { NgTemplateOutlet } from '@angular/common';
+import { DayPilot, DayPilotCalendarComponent, DayPilotModule, DayPilotSchedulerComponent } from '@daypilot/daypilot-lite-angular';
 
 interface Toast {
   id: number;
@@ -15,7 +18,7 @@ interface Toast {
 
 @Component({
   selector: 'app-schedule-tuition',
-  imports: [TableModule, ButtonModule, BadgeModule, FontAwesomeModule],
+  imports: [TabsModule, TableModule, ButtonModule, BadgeModule, FontAwesomeModule, NgTemplateOutlet, DayPilotModule],
   templateUrl: './schedule-tuition.component.html',
   styleUrl: './schedule-tuition.component.scss',
 })
@@ -27,6 +30,53 @@ export class ScheduleTuitionComponent implements OnInit {
   selectedSchedules: Class[] = [];
 
   faInfoCircle = faInfoCircle;
+  tabValue = signal('1');
+
+  @ViewChild(DayPilotSchedulerComponent)
+  scheduler!: DayPilotSchedulerComponent;
+
+  
+  @ViewChild(DayPilotCalendarComponent)
+  calendar!: DayPilotCalendarComponent;
+
+  resources = signal<DayPilot.ResourceData[]>([
+    {
+      name: 'Group A',
+      id: 'GA',
+      expanded: true,
+      children: [
+        { name: 'Resource 1', id: 'R1', capacity: 10 },
+        { name: 'Resource 2', id: 'R2', capacity: 30 },
+        { name: 'Resource 3', id: 'R3', capacity: 20 },
+        { name: 'Resource 4', id: 'R4', capacity: 40 },
+      ],
+    },
+  ]);
+
+  scheduleConfig = signal<DayPilot.SchedulerConfig>({
+    timeHeaders: [
+      { groupBy: 'Month', format: 'MMMM yyyy' },
+      { groupBy: 'Day', format: 'd' },
+    ],
+    scale: 'Day',
+    startDate: '2022-01-05',
+    days: 35,
+    eventEndSpec: 'DateTime',
+    resources: [{ name: 'Resource 1', id: 'R1' }],
+    heightSpec: 'Auto',
+    timeFormat: 'Clock12Hours',
+    width: '100%',
+  });
+
+  calendarConfig = signal<DayPilot.CalendarConfig>({
+    viewType: 'Week',
+    startDate: '2022-01-05',
+    timeFormat: 'Clock12Hours',
+  });
+
+  events = signal<DayPilot.EventData[]>([
+    { id: 1, start: '2022-01-21T10:00:00', end: '2022-01-21T14:00:00', text: 'Event 1', resource: 'R1' },
+  ]);
 
   ngOnInit() {
     this.siteDataService.classes.subscribe((classes: Class[]) => {
@@ -36,8 +86,6 @@ export class ScheduleTuitionComponent implements OnInit {
       this.tuition = tuition;
     });
   }
-
-  private convertClasses() {}
 
   dayOptions = [
     { label: 'Show All Days', value: 'all' },
@@ -182,5 +230,10 @@ export class ScheduleTuitionComponent implements OnInit {
     this.ageFilter.set('all');
     this.styleFilter.set('all');
     this.levelFilter.set('all');
+  }
+  onTabChange(newValue: string | number | undefined) {
+    if (typeof newValue === 'string') {
+      this.tabValue.set(newValue);
+    }
   }
 }

@@ -1,4 +1,4 @@
-<div class="bg-[#8E8E93] text-[#1C1C1E] antialiased flex flex-col h-full">
+<ng-template #tuitionRef>
   <!-- Main Content Grid -->
   <main class="mx-auto px-0 sm:p-6 lg:p-2 grow w-full h-full">
     <div class="flex flex-col p-5 xl:p-0 xl:flex-row items-stretch gap-6 w-full h-full">
@@ -286,4 +286,33 @@
       </div>
     </div>
   </main>
+</ng-template>
+
+<ng-template #schedule>
+  <daypilot-month [config]="calendarConfig()" [events]="events()"></daypilot-month>
+  <daypilot-scheduler [config]="scheduleConfig()" [events]="events()" #scheduler></daypilot-scheduler>
+</ng-template>
+
+<div class="flex flex-col h-full w-full overflow-auto mb-2">
+  <p-tabs class="sticky top-0 z-1" [value]="tabValue()" (valueChange)="onTabChange($event)">
+    <p-tablist>
+      <p-tab [value]="'0'" [disabled]="true" class="flex items-center !gap-2 text-inherit">
+        <span>Schedule</span>
+      </p-tab>
+      <p-tab [value]="'1'" class="flex items-center !gap-2 text-inherit">
+        <span>Tuition</span>
+      </p-tab>
+    </p-tablist>
+  </p-tabs>
+
+  @switch (tabValue()) {
+    @case ('0') {
+      <ng-container [ngTemplateOutlet]="schedule" />
+    }
+
+    @case ('1') {
+      <ng-container [ngTemplateOutlet]="tuitionRef" />
+    }
+
+  }
 </div>

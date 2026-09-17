@@ -184,7 +184,7 @@
   </div>
 </ng-template>
 
-<div class="flex flex-col h-full w-full">
+<div class="flex flex-col h-full w-full overflow-auto mb-2">
   <p-tabs class="sticky top-0 z-1" [value]="tabValue()" (valueChange)="onTabChange($event)">
     <p-tablist>
       <p-tab [value]="'0'" class="flex items-center !gap-2 text-inherit">

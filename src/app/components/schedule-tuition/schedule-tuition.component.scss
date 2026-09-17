@@ -6,3 +6,8 @@
   overflow: auto;
   background-color: #8e8e93;
 }
+::ng-deep {
+  .p-tablist-tab-list {
+    justify-content: center;
+  }
+}
