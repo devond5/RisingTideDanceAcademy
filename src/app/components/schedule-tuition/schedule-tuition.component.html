@@ -39,30 +39,30 @@
               <fa-icon [icon]="faInfoCircle" class="mr-1" />
               <span>Multi-sibling discount: <strong>10% Off</strong> base tuition</span>
             </div>
-            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+            <!-- <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
               <fa-icon [icon]="faInfoCircle" class="mr-1" />
               <span>Ensemble & Artists in Motion Class Assistant: <strong>$20 Off</strong> tuition per class assisted</span>
-            </div>
-            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+            </div> -->
+            <!-- <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
               <fa-icon [icon]="faInfoCircle" class="mr-1" />
               <span>Ensemble & Artists in Motion Admin Assistant: <strong>$15 Off</strong> base tuition per hour worked</span>
-            </div>
-            <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
+            </div> -->
+            <!-- <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
               <fa-icon [icon]="faInfoCircle" class="mr-1" />
               <span>Parent/Studio Trade Work: </span>
-            </div>
+            </div> -->
             <p class="text-white">Fees:</p>
             <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
               <fa-icon [icon]="faInfoCircle" class="mr-1" />
-              <span>Annual Registration(Per Household): <strong>$60.00</strong></span>
+              <span>Annual Registration (Per Household): <strong>$60.00</strong></span>
             </div>
             <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
               <fa-icon [icon]="faInfoCircle" class="mr-1" />
-              <span>Recital Costume(Per Routine): <strong>$25.00</strong></span>
+              <span>Recital Costume (Per Routine): <strong>$25.00</strong></span>
             </div>
             <div class="flex flex-row items-start text-s text-[#70afb5] p-2">
               <fa-icon [icon]="faInfoCircle" class="mr-1" />
-              <span>Recital(Per Dancer): <strong>$85.00</strong></span>
+              <span>Recital (Per Dancer): <strong>$85.00</strong></span>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
           </div>
         </div>
 
-        <!-- Schedule Panel using p-table -->
+        <!-- Schedule Panel using p-table -->k
         <div
           class="bg-black rounded-2xl border border-[#70afb5]/20 shadow-sm overflow-hidden flex flex-col max-h-[46rem] md:max-h-[revert]"
         >
@@ -276,9 +276,10 @@
 
           <button
             (click)="registerSelected()"
-            class="cursor-pointer w-full bg-[#165163] hover:bg-[#165163]/90 text-white mt-5 py-3 rounded-xl font-bold text-sm tracking-wider uppercase shadow-md flex items-center justify-center gap-2 transition-colors"
+            [disabled]="true"
+            class="disabled:opacity-[0.5] cursor-pointer w-full bg-[#165163] hover:bg-[#165163]/90 text-white mt-5 py-3 rounded-xl font-bold text-sm tracking-wider uppercase shadow-md flex items-center justify-center gap-2 transition-colors"
           >
-            <span class="material-icons text-sm">login</span>
+            <!-- <span class="material-icons text-sm">login</span> -->
             <span>Register Selected Classes</span>
           </button>
         </div>

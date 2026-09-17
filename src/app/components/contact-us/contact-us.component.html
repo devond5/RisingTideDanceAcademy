@@ -1,5 +1,5 @@
-<div class="bg-black rounded-2xl flex flex-col p-5 my-5 mx-56">
-  <h2 class="p-2 text-[#70afb5]">Contact Us</h2>
+<div class="bg-black rounded-2xl flex flex-col p-5 m-5 lg:mx-72">
+  <h2 class="p-2 m-0 text-[#70afb5]">Contact Us</h2>
 
   <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-grid">
     <!-- Name Field -->
@@ -17,21 +17,19 @@
       }
     </div>
 
-     <!-- Student name Field -->
+    <!-- Student name Field -->
     <div class="field">
       <label for="student" class="text-[#70afb5]">Student Name *</label>
       <input
         pInputText
         id="student"
         formControlName="student"
-        placeholder="How can we help?"
+        placeholder="What are your student(s) name(s)?"
         [class.ng-invalid]="contactForm.get('student')?.invalid && contactForm.get('student')?.touched"
       />
       @if (contactForm.get('student')?.invalid && contactForm.get('student')?.touched) {
-      <small class="error-text">
-        Subject is required.
-      </small>
-    }
+        <small class="error-text"> Subject is required. </small>
+      }
     </div>
 
     <!-- Email Field -->
@@ -46,10 +44,8 @@
         [class.ng-invalid]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
       />
       @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
-      <small class="error-text">
-        Please enter a valid email address.
-      </small>
-    }
+        <small class="error-text"> Please enter a valid email address. </small>
+      }
     </div>
 
     <!-- Subject Field -->
@@ -63,10 +59,8 @@
         [class.ng-invalid]="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched"
       />
       @if (contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched) {
-      <small *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched" class="error-text">
-        Subject is required.
-      </small>
-    }
+        <small class="error-text"> Subject is required. </small>
+      }
     </div>
 
     <!-- Message Field -->
@@ -82,15 +76,25 @@
         [class.ng-invalid]="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
       ></textarea>
       @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
-      <small class="error-text">
-        Message must be at least 10 characters long.
-      </small>
-    }
+        <small class="error-text"> Message must be at least 10 characters long. </small>
+      }
     </div>
 
     <!-- Submit Button -->
     <div class="field">
-      <p-button label="Send Message" icon="pi pi-send" type="submit" [disabled]="contactForm.pending"></p-button>
+      <p-button
+        class="flex justify-end"
+        label="Send Message"
+        icon="pi pi-send"
+        type="submit"
+        [style.opacity]="!contactForm.pending ? '1' : '0.6'"
+        [disabled]="contactForm.invalid"
+      ></p-button>
     </div>
   </form>
 </div>
+<p-toast position="bottom-center" [baseZIndex]="999999">
+  <ng-template let-message #message>
+    <span class="toast-summary">{{ message.summary }}</span>
+  </ng-template>
+</p-toast>

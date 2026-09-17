@@ -1,5 +1,5 @@
 <ng-template #rtda>
-  <div class="flex flex-col items-center w-full h-full p-5 px-56">
+  <div class="flex flex-col items-center w-full h-full p-2 px-5 lg:px-16">
     <h1 class="text-black my-2">Our Story</h1>
     <div class="bg-black rounded-2xl p-5">
       <h3>Dance belongs to everyone.</h3>
@@ -38,10 +38,104 @@
 </ng-template>
 
 <ng-template #staff>
-  <div class="flex flex-col items-center w-full h-full">
+  <div class="flex flex-col items-center w-full h-full px-5 lg:px-16">
     <h1 class="text-black my-2">Our People</h1>
-    <div class="bg-black rounded-2xl w-3xl h-auto mb-5 flex flex-col justify-center">
-      <p-carousel [value]="instructors" [numVisible]="1" [numScroll]="1">
+    <div class="flex flex-row">
+      <button (click)="selectedInstructorPrevious()" type="button" class="border-none bg-transparent">
+        <fa-icon [icon]="faChevronLeft" class="fa-2xl text-white hover:text-black hover:cursor-pointer" />
+      </button>
+      <div class="bg-black rounded-2xl w-full h-auto mb-5 flex flex-row justify-evenly">
+        <div class="flex flex-col">
+          <div class="flex w-full justify-center">
+            <h3 class="text-2xl font-semibold text-white mb-1">{{ instructors[selectedInstructor()].teacherName }}</h3>
+          </div>
+          <div class="flex flex-row">
+            @if (
+              (instructors[selectedInstructor()].teacherPhotos && instructors[selectedInstructor()].teacherPhotos!.length > 0) ||
+              (instructors[selectedInstructor()].teacherVideos && instructors[selectedInstructor()].teacherVideos!.length > 0)
+            ) {
+              <div class="flex flex-col p-5 h-full w-full justify-start">
+                @if (
+                  instructors[selectedInstructor()].teacherVideos &&
+                  instructors[selectedInstructor()].teacherVideos!.length > 0 &&
+                  instructors[selectedInstructor()].teacherPhotos &&
+                  instructors[selectedInstructor()].teacherPhotos!.length > 0
+                ) {
+                  <div class="flex flex-row justify-evenly p-0 w-full gap-2">
+                    <button
+                      class="cursor-pointer w-full bg-[#165163] hover:bg-[#165163]/90 text-white mt-0 py-1 rounded-xl font-bold text-sm tracking-wider uppercase shadow-md flex items-center justify-center gap-2 transition-colors"
+                      (click)="isPicture.set(true)"
+                    >
+                      Pictures
+                    </button>
+                    <button
+                      class="cursor-pointer w-full bg-[#165163] hover:bg-[#165163]/90 text-white mt-0 py-1 rounded-xl font-bold text-sm tracking-wider uppercase shadow-md flex items-center justify-center gap-2 transition-colors"
+                      (click)="isPicture.set(false)"
+                    >
+                      Videos
+                    </button>
+                  </div>
+                }
+                @if (isPicture()) {
+                  <div class="flex flex-col p-5 h-auto justify-center">
+                    <img class="max-w-full" [src]="instructors[selectedInstructor()].teacherPhotos[selectedInstructorPicture()]" />
+                    @if (instructors[selectedInstructor()].teacherPhotos!.length > 1) {
+                    <div class="flex flex-row justify-center gap-2.5 p-3">
+                      @for (pic of instructors[selectedInstructor()].teacherPhotos; track $index) {
+                        <button
+                          (click)="selectedInstructorPictureNext($index)"
+                          type="button"
+                          class="border-none bg-transparent hover:cursor-pointer"
+                        >
+                          <fa-icon
+                            [icon]="faDotCircle"
+                            class="fa-md hover:text-gray"
+                            [style.color]="selectedInstructorPicture() === $index ? '#70afb5' : 'white'"
+                          />
+                        </button>
+                      }
+                    </div>
+                  }
+                  </div>
+                } @else {
+                  <div class="flex flex-col p-5 h-auto min-h-1/2 lg:h-full justify-center">
+                    <video controls width="100%" height="100%" class="max-w-full">
+                      <source [src]="instructors[selectedInstructor()].teacherVideos![selectedInstructorVideo()]" type="video/mp4" />
+                    </video>
+                    @if (instructors[selectedInstructor()].teacherVideos!.length > 1) {
+                      <div class="flex flex-row justify-center gap-2.5 p-3">
+                        @for (pic of instructors[selectedInstructor()].teacherVideos; track $index) {
+                          <button
+                            (click)="selectedInstructorVideoNext($index)"
+                            type="button"
+                            class="border-none bg-transparent hover:cursor-pointer"
+                          >
+                            <fa-icon
+                              [icon]="faDotCircle"
+                              class="fa-md hover:text-gray"
+                              [style.color]="selectedInstructorVideo() === $index ? '#70afb5' : 'white'"
+                            />
+                          </button>
+                        }
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            }
+
+            <div class="flex flex-col p-5 h-full w-full">
+              <p class="text-sm font-medium tracking-widest text-neutral-500 uppercase mb-4 text-center">
+                {{ instructors[selectedInstructor()].teacherStyles.join(', ') }}
+              </p>
+              <p class="text-neutral-400 text-sm leading-relaxed">
+                {{ instructors[selectedInstructor()].teacherBio }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- <p-carousel [value]="instructors" [numVisible]="1" [numScroll]="1">
         <ng-template let-instructor pTemplate="item">
           <div class="px-4 flex justify-center">
             <div class="flex flex-col items-center">
@@ -52,12 +146,12 @@
                   [showItemNavigators]="true"
                   [showThumbnails]="false"
                   [showIndicatorsOnItem]="false"
-                  [showIndicators]="true"
+                  [showIndicators]="false"
                   [containerStyle]="{ 'max-width': '640px' }"
                   [showItemNavigatorsOnHover]="true"
                 >
                   <ng-template #item let-item>
-                    <img [src]="item" style="height: 200px; display: block" />
+                    <img [src]="item" style="max-height: 250px; display: block" />
                   </ng-template>
                 </p-galleria>
               }
@@ -69,17 +163,22 @@
             </div>
           </div>
         </ng-template>
-      </p-carousel>
+      </p-carousel> -->
+      </div>
+      <button (click)="selectedInstructorNext()" type="button" class="border-none bg-transparent">
+        <fa-icon [icon]="faChevronRight" class="fa-2xl text-white hover:text-black hover:cursor-pointer" />
+      </button>
     </div>
   </div>
 </ng-template>
 
 <ng-template #studio>
-  <div class="flex flex-col items-center w-full h-full p-5 px-56">
+  <div class="flex flex-col items-center w-full h-full p-5 px-5 lg:px-56">
     <h1 class="text-black my-2">Our Studio</h1>
     <div class="bg-black rounded-2xl p-5">
       <p>
-        We Are currently in search of a studio space. Hoping to have minimum 10,000 sq feet. 3 Studio spaces. Lobby and study/quiet room.
+        We Are currently in search of a studio space. Hoping to have minimum a minimum of 6000 sq feet. 3 Studio spaces. Lobby and
+        study/quiet room. We are currently looking into the new Seamist Commons located across from Cane Bay Highschool.
       </p>
     </div>
   </div>

@@ -6,38 +6,33 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
-  standalone:true,
+  standalone: true,
   selector: 'app-contact-us',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    TextareaModule,
-    ButtonModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, TextareaModule, ButtonModule, ToastModule],
   providers: [MessageService],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss',
 })
-export class ContactUsComponent implements OnInit{
-
+export class ContactUsComponent implements OnInit {
   private http = inject(HttpClient);
   private messageService = inject(MessageService);
   private fb = inject(FormBuilder);
 
-  private readonly emailURL ='https://script.google.com/macros/s/AKfycbxoXox65DZhUmFO3zPlUDGB5N88__TvqU26BabKz2bgU8Fe4I3F9y4nsAr75uczKQUQ/exec';
+  private readonly emailURL =
+    'https://script.google.com/macros/s/AKfycbxoXox65DZhUmFO3zPlUDGB5N88__TvqU26BabKz2bgU8Fe4I3F9y4nsAr75uczKQUQ/exec';
 
   contactForm!: FormGroup;
 
- ngOnInit(): void {
+  ngOnInit(): void {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       student: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       subject: ['', [Validators.required]],
-      message: ['', [Validators.required, Validators.minLength(10)]]
+      message: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
 
@@ -47,19 +42,27 @@ export class ContactUsComponent implements OnInit{
       return;
     }
 
-    this.http.post(this.emailURL, JSON.stringify(this.contactForm.value), {
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-    }).subscribe({
-      next: (success)=>{
-        console.log("success");
-      },
-      error: (err)=> {
-        console.log("error");
-      },
-    });
-
-    // Process submission (e.g., call backend API)
-    console.log('Form Submitted:', this.contactForm.value);
+    this.http
+      .post(this.emailURL, JSON.stringify(this.contactForm.value), {
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      })
+      .subscribe({
+        next: success => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Message successfully sent! We will try to respond within 48 business hours.',
+            life: 10000,
+          });
+          this.contactForm.reset();
+        },
+        error: err => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Message unsuccessful. Try emailing us directly and we will try to respond within 48 business hours.',
+            life: 10000,
+          });
+        },
+      });
 
   }
 }
