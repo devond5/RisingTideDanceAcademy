@@ -26,6 +26,16 @@
     </p-panel>
   </p-panel>
 
+  <p-panel toggler="header" [toggleable]="true" [collapsed]="true" class="mb-5">
+    <ng-template #header>
+      <h2 class="cursor-pointer">Tutoring</h2>
+    </ng-template>
+    <p class="m-0 text-color-secondary">
+      At Rising Tide Dance Academy, we believe that artistic excellence and academic success go hand in hand. Our mission is to empower dancers to excel both on stage and in the classroom by fostering strong study habits, self-discipline, and time-management skills.
+      We offer a quiet, structured study zone at the studio for dancers arriving before class or between rehearsals. Scheduled tutoring sessions—led by qualified instructors or academic tutors—provide direct help with homework, test preparation, and study strategies.
+    </p>
+  </p-panel>
+
   @for (style of formattedClasses; track style) {
     <p-panel toggler="header" [toggleable]="true" [collapsed]="true" class="mb-5">
       <ng-template #header>

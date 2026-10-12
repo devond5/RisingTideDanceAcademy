@@ -9,6 +9,7 @@ import { AgeGroup, BaseStyles, Class, Days, Level, Tuition } from '../../types/c
 import { TabsModule } from 'primeng/tabs';
 import { NgTemplateOutlet } from '@angular/common';
 import { DayPilot, DayPilotCalendarComponent, DayPilotModule, DayPilotSchedulerComponent } from '@daypilot/daypilot-lite-angular';
+import { TooltipModule } from 'primeng/tooltip';
 
 interface Toast {
   id: number;
@@ -18,7 +19,7 @@ interface Toast {
 
 @Component({
   selector: 'app-schedule-tuition',
-  imports: [TabsModule, TableModule, ButtonModule, BadgeModule, FontAwesomeModule, NgTemplateOutlet, DayPilotModule],
+  imports: [TabsModule, TableModule, ButtonModule, BadgeModule, FontAwesomeModule, NgTemplateOutlet, DayPilotModule, TooltipModule],
   templateUrl: './schedule-tuition.component.html',
   styleUrl: './schedule-tuition.component.scss',
 })
@@ -29,13 +30,14 @@ export class ScheduleTuitionComponent implements OnInit {
   tuition!: Tuition[];
   selectedSchedules: Class[] = [];
 
+  students: WritableSignal<any[]> = signal([]);
+
   faInfoCircle = faInfoCircle;
   tabValue = signal('1');
 
   @ViewChild(DayPilotSchedulerComponent)
   scheduler!: DayPilotSchedulerComponent;
 
-  
   @ViewChild(DayPilotCalendarComponent)
   calendar!: DayPilotCalendarComponent;
 
@@ -77,6 +79,8 @@ export class ScheduleTuitionComponent implements OnInit {
   events = signal<DayPilot.EventData[]>([
     { id: 1, start: '2022-01-21T10:00:00', end: '2022-01-21T14:00:00', text: 'Event 1', resource: 'R1' },
   ]);
+
+  selectedStudent = signal<null | number>(null);
 
   ngOnInit() {
     this.siteDataService.classes.subscribe((classes: Class[]) => {
@@ -123,7 +127,7 @@ export class ScheduleTuitionComponent implements OnInit {
   ageFilter = signal<string>('all');
   styleFilter = signal<string>('all');
   levelFilter = signal<string>('all');
-  selectedClassesTable = signal<Class[]>([]);
+  selectedClasses = signal<Class[]>([]);
   mobileMenuOpen = signal<boolean>(false);
   toasts = signal<Toast[]>([]);
 
@@ -137,16 +141,20 @@ export class ScheduleTuitionComponent implements OnInit {
     });
   });
 
-  selectedClasses = computed(() => {
-    return this.scheduleData().filter(cls =>
-      this.selectedClassesTable()
+  selectedClassesEstimator = computed(() => {
+    const selectedClasses = this.scheduleData().filter(cls =>
+      this.selectedClasses()
         .map(v => v.className)
         .includes(cls.className),
     );
+    if (this.selectedStudent() !== null) {
+      this.students()[this.selectedStudent()!].classes = selectedClasses;
+    }
+    return selectedClasses;
   });
 
   totalHours = computed(() => {
-    return this.selectedClassesTable().reduce((sum, cls) => sum + parseFloat(cls.hours), 0);
+    return this.selectedClasses().reduce((sum, cls) => sum + parseFloat(cls.hours), 0);
   });
 
   finalMonthlyCost = computed(() => {
@@ -154,11 +162,15 @@ export class ScheduleTuitionComponent implements OnInit {
     if (this.tuition.length > 0) {
       const foundTuition = this.tuition.find(t => t.hours === totalHrs);
       if (foundTuition) {
-        return foundTuition.price;
+        return this.students() && this.students().length > 1
+          ? `$${parseFloat(foundTuition.price.replace('$', '')) * 0.9}`
+          : foundTuition.price;
       }
       const maxTuition = this.tuition.reduce((max, current) => (current.hours > max.hours ? current : max), this.tuition[0]);
       if (totalHrs > maxTuition.hours) {
-        return maxTuition.price;
+        return this.students() && this.students().length > 1
+          ? `$${(parseFloat(maxTuition.price.replace('$', '')) * 0.9).toString()}`
+          : maxTuition.price;
       }
     }
 
@@ -177,16 +189,16 @@ export class ScheduleTuitionComponent implements OnInit {
   }
 
   toggleSelection(selectedClass: string) {
-    const current = this.selectedClassesTable();
+    const current = this.selectedClasses();
     const classObj = this.scheduleData().find(c => c.className === selectedClass);
 
     if (current.map(v => v.className).includes(selectedClass)) {
-      this.selectedClassesTable.set(current.filter(cls => cls.className !== selectedClass));
+      this.selectedClasses.set(current.filter(cls => cls.className !== selectedClass));
       if (classObj) {
         this.addToast(`Removed: ${classObj.className}`, 'info');
       }
     } else if (classObj) {
-      this.selectedClassesTable.set([...current, classObj]);
+      this.selectedClasses.set([...current, classObj]);
       if (classObj) {
         this.addToast(`Added to Estimator: ${classObj.className}`, 'success');
       }
@@ -194,7 +206,7 @@ export class ScheduleTuitionComponent implements OnInit {
   }
 
   isClassSelected(selectedClass: string): boolean {
-    return this.selectedClassesTable()
+    return this.selectedClasses()
       .map(v => v.className)
       .includes(selectedClass);
   }
@@ -209,7 +221,7 @@ export class ScheduleTuitionComponent implements OnInit {
   }
 
   registerSelected() {
-    const count = this.selectedClassesTable().length;
+    const count = this.selectedClasses().length;
     if (count === 0) {
       this.addToast('Please select at least one class to estimate tuition.', 'info');
       return;
@@ -235,5 +247,26 @@ export class ScheduleTuitionComponent implements OnInit {
     if (typeof newValue === 'string') {
       this.tabValue.set(newValue);
     }
+  }
+
+  addStudent() {
+    if (this.students().length === 0) {
+      this.selectedStudent.set(0);
+    }
+    this.students.update(students => [...students, { name: '', age: '', classes: [] }]);
+  }
+
+  removeStudent(index: number) {
+    this.students.update(students => students.filter((_, i) => i !== index));
+    if (this.students().length === 0) {
+      this.selectedStudent.set(null);
+    }
+  }
+
+  selectStudent(index: number) {
+    const student = this.students()[index];
+    this.selectedStudent.set(index);
+    console.log(`Selected Student ${index + 1}:`, student);
+    this.selectedClasses.set(student.classes);
   }
 }
